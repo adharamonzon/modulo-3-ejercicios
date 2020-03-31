@@ -5,7 +5,7 @@ import heart from '../images/heart-regular.svg';
 
 const MediaCard = promps => {
   const appHeader = (<header className="App-header">
-    <img src={franPerea} className="App-logo" alt="logo" />
+    <img src={franPerea} className="foto" alt="foto" />
     <div className= "title">
     <h1>{promps.name}</h1>
     <h3> nacido para cantautar y llorar</h3>
