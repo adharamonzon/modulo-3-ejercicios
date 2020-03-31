@@ -2,7 +2,7 @@
 //con la clase Square:
 
 //1. hacer un método para alcular el perímetro y el área del cuadrado
-const size = 16;
+
 class Square {
   perimeter() {
     const resultPerimeter = size * 4;
@@ -15,5 +15,9 @@ class Square {
 }
 const cuadrado1 = new Square();
 
-cuadrado1.perimeter();
-cuadrado1.area();
+cuadrado1.perimeter(16);
+cuadrado1.area(16);
+
+export default {
+  getSquare: Square
+};

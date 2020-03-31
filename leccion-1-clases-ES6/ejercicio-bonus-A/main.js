@@ -11,34 +11,40 @@ class Polygon {
     this.height = height;
   }
   perimeter() {
-    const resultPerimeter = triangle1.numberOfSides * 4;
+    let resultPerimeter = this.base * this.numberOfSides;
     console.log(resultPerimeter);
   }
   area() {
-    const resultArea = Math.pow(triangle1, 2);
+    let resultArea = Math.pow(this.base, 2);
     console.log(resultArea);
   }
-} //algo pasa!
+} //declaras la subclase cuadrado, y sobreescribes los parámetros del constructro madre con super();
 class Square extends Polygon {
   constructor(side) {
-    this.base = side;
+    super(4, side, side);
+    this.side = side;
   }
 }
 
 class Triangle extends Polygon {
   constructor(base, height) {
-    this.base = base;
-    this.height = height;
-    const resultedArea = area(super.area() / 2);
+    super(3, base, height); //coge el valor de la base y la altura del constructor madre;
+  }
+  area() {
+    let resultedArea = area(super.area() / 2);
     console.log(resultedArea);
   }
 }
+//revisar
+const form1 = new Polygon('5', '10', '7');
+form1.perimeter();
+form1.area();
 
-const triangle1 = new Polygon('5', '10', '20');
-console.log(triangle1.numberOfSides, triangle1.base, triangle1.height);
-console.log(triangle1.resultPerimeter);
+const form2 = new Square('10');
+console.log(form2);
+form2.area();
+form2.perimeter();
 
-const square1 = new Square('4');
-
-const triangle3 = new Triangle('7', '7');
-console.log(resulteArea);
+const form3 = new Triangle('13', '25');
+form3.perimeter();
+form3.area();
