@@ -1,23 +1,28 @@
 import React from 'react';
 
 //función que si trabaja
-const HatePiña = props => {
-  constructor(props);
-  {
+class HatePiña extends React.Component {
+  constructor(props) {
     super(props);
-    this.isHating = false;
+    this.state = {
+      isHating: false
+    };
+    this.OnionHater = this.OnionHater.bind(this);
   }
-  const OnionHater = ev => {
+  OnionHater = ev => {
     let cebollitis = ev.target.value;
-    if (cebollitis.includes('cebolla')) {
-      this.isHating = true;
-      this.forceUpdate();
+    if (cebollitis.toLowerCase().includes('cebolla')) {
+      this.setState({ isHating: true });
+    } else {
+      this.setState({ isHating: false });
     }
   };
-  return (
-    <div className='textarea'>
-      <textarea className={props.hatePiña} onChange={OnionHater}></textarea>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className={this.state.isHating ? 'textarea red' : 'container'}>
+        <textarea className='' onChange={this.OnionHater}></textarea>
+      </div>
+    );
+  }
+}
 export default HatePiña;

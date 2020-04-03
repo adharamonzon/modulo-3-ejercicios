@@ -3,7 +3,7 @@ import React from 'react';
 // evento escuchador (no hase na!, no importar)
 const OnionHater = ev => {
   let cebollitis = ev.target.value;
-  if (cebollitis.includes('cebolla' || 'CEBOLLA')) {
+  if (cebollitis.toLowerCase().includes('cebolla')) {
     alert('ODIO LA CEBOLLA');
   }
 };
