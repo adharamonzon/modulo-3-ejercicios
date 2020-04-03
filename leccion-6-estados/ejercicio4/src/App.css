@@ -1,0 +1,19 @@
+.sheep-container {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100px;
+  align-self: center;
+  margin: 30px 45px;
+}
+
+.sheep {
+  height: 70px;
+  width: auto;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: rgb(49, 160, 49);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
