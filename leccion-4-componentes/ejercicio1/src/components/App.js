@@ -1,13 +1,9 @@
 import React from 'react';
-import items from './arrayList';
+import ItemList from './itemList';
 
 class App extends React.Component {
-  items.map(item)
   render() {
-    /*     const comidillas = items => {
-      console.log(App); */
-
-    return <li>{items}</li>;
+    return <ItemList />;
   }
 }
 
