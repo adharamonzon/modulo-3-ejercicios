@@ -14,27 +14,38 @@ const renderEmails = () => {
   });
 };
 
-function App() {
-  const handleInboxFilter = () => {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inboxFilter: '',
+    };
+  }
+  handleInboxFilter() {
     console.log('App: me han clicado');
-  };
-  const handleDeleteFilter = () => {
+  }
+  handleDeleteFilter() {
     console.log('App: han clicado en la papelera');
-  };
-  const handleTextFilter = (value) => {
+  }
+  handleTextFilter(value) {
     console.log('App: han escrito en el campo de texto', value);
-  };
-  return (
-    <div>
-      <Header handleInboxFilter={handleInboxFilter} handleDeleteFilter={handleDeleteFilter} handleTextFilter={handleTextFilter} />
+  }
+  //métodos encima del render, esta es la manera de escribir estos métodos de clase las arrow para los comp. funcionales
+  render() {
+    console.log(this.state); //buen lugar para ver el estado inicial
 
-      <table className='table'>
-        <tbody>{renderEmails()}</tbody> {/* podemos sacar la función del map fuera y llamar a la función dentro de donde vamos a renderizar */}
-      </table>
+    return (
+      <div>
+        <Header handleInboxFilter={this.handleInboxFilter} handleDeleteFilter={this.handleDeleteFilter} handleTextFilter={this.handleTextFilter} />
 
-      <EmailReader key={emails[0].id} fromName={emails[0].fromName} subject={emails[0].subject} time={emails[0].date} email={emails[0].fromEmail} />
-    </div>
-  );
+        <table className='table'>
+          <tbody>{renderEmails()}</tbody> {/* podemos sacar la función del map fuera y llamar a la función dentro de donde vamos a renderizar */}
+        </table>
+
+        <EmailReader key={emails[0].id} fromName={emails[0].fromName} subject={emails[0].subject} time={emails[0].date} email={emails[0].fromEmail} />
+      </div>
+    );
+  }
 }
 export default App;
 
