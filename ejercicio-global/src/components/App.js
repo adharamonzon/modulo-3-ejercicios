@@ -6,7 +6,7 @@ import emails from './ArrayEmails';
 
 import '../stylesheets/App.css';
 
-//versión limpia
+//versión limpia con componente funcional! PARA USAR ESTADOS NECESITAMOS HOOKS O PASAR APP A COMPONENTE DE CLASE
 
 const renderEmails = () => {
   return emails.map((email) => {
