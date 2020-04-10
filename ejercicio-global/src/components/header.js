@@ -14,7 +14,7 @@ const Header = (props) => {
         Gmail
       </h1>
       <HeaderForm handleInboxFilter={props.handleInboxFilter} handleDeleteFilter={props.handleDeleteFilter} handleTextFilter={props.handleTextFilter} />
-    </header>
+    </header> //el primer handleInboxFilter viene de App (abuela) y el 2º es la nieta.
   );
 }; //la función de mi hija es = a la función de mi madre linea 16:HedaerForm
 
