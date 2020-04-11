@@ -15,11 +15,14 @@ class App extends React.Component {
       emails: emails,
       inboxFilter: '',
       showInbox: true,
+      showEmailId: '',
     };
     this.handleInboxFilter = this.handleInboxFilter.bind(this);
     this.handleDeleteFilter = this.handleDeleteFilter.bind(this);
     this.handleTextFilter = this.handleTextFilter.bind(this);
     this.handleDeleteEmail = this.handleDeleteEmail.bind(this);
+    this.handleCloseEmail = this.handleCloseEmail.bind(this);
+    this.handleSelectEmail = this.handleSelectEmail.bind(this);
   }
   //métodos encima del render, esta es la manera de escribir estos métodos de clase las arrow para los comp. funcionales
 
@@ -29,26 +32,50 @@ class App extends React.Component {
       showInbox: true,
     });
   }
+
   handleDeleteFilter() {
     this.setState({
       showInbox: false,
     });
   }
-  handleDeleteEmail(emailId) {
-    this.setState((prevState) => {
-      const email = prevState.emails.find((email) => email.id === emailId);
-      email.deleted = true; //usamos la constante que seria de this.state dentro como prevState ya que se ejecuta de manera asíncrona para evitar errores
-      return {
-        emails: prevState.emails,
-      };
-    });
-  }
+
   handleTextFilter(data) {
     this.setState({
       inboxFilter: data.value,
     }); //datar viene de headerForm a Header y de ahi a app
     //en el estado GUARDAMOS LOS DATOS MÁS ORIGINALES POSIBLES/en el estado sin modificar! en el RENDER ya se hacen los cálculos necesarios
   }
+
+  handleDeleteEmail(emailId) {
+    this.setState((prevState) => {
+      const email = prevState.emails.find((email) => email.id === emailId);
+      email.deleted = true;
+      return {
+        emails: prevState.emails,
+        showEmailId: emailId === prevState.showEmailId ? '' : prevState.showEmailId,
+        //si el usuario borra el mail seleccionado se desselecciona
+      };
+    });
+    //usamos la constante que seria de this.state dentro como prevState ya que se ejecuta de manera asíncrona para evitar errores
+  }
+
+  handleSelectEmail(emailId) {
+    this.setState((prevState) => {
+      const email = prevState.emails.find((email) => email.id === emailId);
+      email.read = true;
+      return {
+        emails: prevState.emails,
+        showEmailId: emailId,
+      };
+    });
+  }
+
+  handleCloseEmail() {
+    this.setState({
+      showEmailId: '',
+    });
+  }
+
   //aqui pintamos los que hemos guardado en los métodos de arriba:
   renderFilters() {
     const emailType = this.state.showInbox ? 'recibidos ' : 'borrados ';
@@ -68,6 +95,7 @@ class App extends React.Component {
     );
   }
 
+  //pintar la lista de mails
   renderEmails() {
     const inboxFilter = this.state.inboxFilter.toLowerCase(); // como un método:filteredEmails son un dato calculado o computado/ machaca el dato original = const filteredEmails = this.state.emails.filter(y todo lo que el filter contiene)
     return (
@@ -89,9 +117,18 @@ class App extends React.Component {
           return email.fromName.toLowerCase().includes(inboxFilter) || email.subject.toLowerCase().includes(inboxFilter) || email.body.toLowerCase().includes(inboxFilter);
         })
         .map((email) => {
-          return <EmailItem key={email.id} id={email.id} from={email.fromName} subject={email.subject} time={email.date} deleted={email.deleted} read={email.read} handleDeleteEmail={this.handleDeleteEmail} />;
+          return <EmailItem key={email.id} id={email.id} from={email.fromName} subject={email.subject} time={email.date} deleted={email.deleted} read={email.read} handleDeleteEmail={this.handleDeleteEmail} handleSelectEmail={this.handleSelectEmail} />;
         })
     );
+  }
+
+  //pintar el email abierto
+  renderEmailDetail() {
+    /* const selectedEmail = this.state.emails[1]; */ //enseñaría el correo mostrado a pincho, es necesario hacer un find con el id para mostrar el seleccionado
+    const selectedEmail = this.state.emails.find((email) => email.id === this.state.showEmailId);
+    if (selectedEmail) {
+      return <EmailReader id={selectedEmail.id} fromName={selectedEmail.fromName} subject={selectedEmail.subject} time={selectedEmail.date} body={selectedEmail.body} email={selectedEmail.fromEmail} handleCloseEmail={this.handleCloseEmail} handleDeleteEmail={this.handleDeleteEmail} />;
+    }
   }
 
   render() {
@@ -101,11 +138,13 @@ class App extends React.Component {
       <div>
         <Header handleInboxFilter={this.handleInboxFilter} handleDeleteFilter={this.handleDeleteFilter} handleTextFilter={this.handleTextFilter} />
         {this.renderFilters()}
+
         <table className='table'>
           <tbody>{this.renderEmails()}</tbody>
           {/* podemos sacar la función del map fuera y llamar a la función dentro de donde vamos a renderizar */}
         </table>
-        <EmailReader id={emails.id} fromName={this.state.emails[0].fromName} subject={this.state.emails[0].subject} time={this.state.emails[0].date} email={this.state.emails[0].fromEmail} handleDeleteEmail={this.handleDeleteEmail} />
+
+        {this.renderEmailDetail()}
       </div>
     );
   }

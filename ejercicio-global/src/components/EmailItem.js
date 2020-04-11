@@ -5,25 +5,28 @@ function EmailItem(props) {
   let deletedClass = props.deleted === true ? 'text--decoration--through' : '';
   let readClass = props.read === true ? '' : 'text--bold';
 
-  const handleDeleteEmail = () => {
+  const handleSelectEmail = () => {
+    props.handleSelectEmail(props.id);
+  };
+
+  const handleDeleteEmail = (ev) => {
+    /* ev.stopPropagatino(); */
     props.handleDeleteEmail(props.id);
   };
+
   return (
-    <tr className={`cursor-pointer ${deletedClass} ${readClass}`}>
+    <tr className={`cursor-pointer ${deletedClass} ${readClass}`} onClick={handleSelectEmail}>
       <td>
-        <a href='/' className='text--decoration--none'>
-          {props.from}
-        </a>
+        {props.from}
+        {/* <a href='/' className='text--decoration--none'> </a> */}
       </td>
       <td>
-        <a href='/' className='text--decoration--none'>
-          {props.subject}
-        </a>
+        {props.subject}
+        {/* <a href='/' className='text--decoration--none'></a> */}
       </td>
       <td>
-        <a href='/' className='text--decoration--none'>
-          {props.time}
-        </a>
+        {props.time}
+        {/* <a href='/' className='text--decoration--none'></a> */}
       </td>
       <td className='text-align-right'>
         <button className='form__btn fas fa-trash' onClick={handleDeleteEmail}></button>

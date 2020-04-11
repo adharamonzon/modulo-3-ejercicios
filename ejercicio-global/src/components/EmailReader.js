@@ -2,16 +2,17 @@ import React from 'react';
 
 class EmailReader extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
-    this.handleReplyClick = this.handleClick.bind(this);
     this.handleDeleteEmail = this.handleDeleteEmail.bind(this);
+    this.handleCloseEmail = this.hadleCloseEmail.bind(this);
   }
 
-  handleClick(ev) {
-    console.log('me han clickado con el evento:', ev.currentTarget);
-  }
   handleDeleteEmail() {
     this.props.handleDeleteEmail(this.props.id);
+  }
+  hadleCloseEmail() {
+    this.props.hadleCloseEmail();
   }
 
   render() {
@@ -26,17 +27,15 @@ class EmailReader extends React.Component {
             </h3>
           </div>
           <div className='text-align-right'>
-            <a href='/'>
-              <button className='fas fa-times-circle form__btn'></button>
-            </a>
+            <button className='fas fa-times-circle form__btn' onClick={this.hadleCloseEmail}></button>
             <button className='fas fa-trash form__btn' onClick={this.handleDeleteEmail}></button>
           </div>
         </div>
 
-        <p>FrontFest es un evento anual y sin ánimo de lucro. Está organizado y gestionado por un equipo de voluntarios y voluntarias que pertenecen a la comunidad de desarrollo frontend. Celebrado por primera vez en 2017, pretende ser un punto de encuentro a nivel nacional, principalmente en castellano, para todas aquellas personas interesadas en las tecnologías de frontend, donde compartir experiencias y aprender acerca de las nuevas tendencias en el sector. Y por supuesto, acabar divirtiéndose en buena compañía.</p>
+        <p>{this.props.body}</p>
 
         <div className='mt-1'>
-          <button className='form__btn' type='button' onClick={this.handleClick}>
+          <button className='form__btn' type='button'>
             {/* // IMPORTANTE: this. ya que es una clase, tiene que ser algo ejecutable, pero sólo se llama a la función. Se pone donde sería el querySelector. */}
             <span className='fas fa-reply'></span>
             Responder
