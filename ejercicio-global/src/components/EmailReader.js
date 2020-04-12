@@ -3,15 +3,13 @@ import React from 'react';
 class EmailReader extends React.Component {
   constructor(props) {
     console.log(props);
-    super(props);
-    this.handleDeleteEmail = this.handleDeleteEmail.bind(this);
-    this.handleCloseEmail = this.hadleCloseEmail.bind(this);
-  }
+    super(props); //si se mete dentro de la f(x) se hace al vuelo, y había que quitar el bind
+    /* this.handleDeleteEmail = this.handleDeleteEmail.bind(this); */ this.handleCloseEmail = this.hadleCloseEmail.bind(this);
+  } // se puede meter dentro del JSX
 
-  handleDeleteEmail() {
+  /* handleDeleteEmail() {
     this.props.handleDeleteEmail(this.props.id);
-  }
-  hadleCloseEmail() {
+  } */ hadleCloseEmail() {
     this.props.hadleCloseEmail();
   }
 
@@ -28,7 +26,12 @@ class EmailReader extends React.Component {
           </div>
           <div className='text-align-right'>
             <button className='fas fa-times-circle form__btn' onClick={this.hadleCloseEmail}></button>
-            <button className='fas fa-trash form__btn' onClick={this.handleDeleteEmail}></button>
+            <button
+              className='fas fa-trash form__btn'
+              onClick={() => {
+                this.props.handleDeleteEmail(this.props.id);
+              }}
+            ></button>
           </div>
         </div>
 

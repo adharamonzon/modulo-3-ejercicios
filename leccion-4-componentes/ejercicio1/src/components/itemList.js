@@ -1,7 +1,4 @@
-import React from 'react';
-import Item from './Item';
-
-const items = [
+const arrayOfItems = [
   {
     name: 'Cereales con chocolate',
     description: 'Cereales rellenos de chocolate',
@@ -25,13 +22,4 @@ const items = [
   },
 ];
 
-class ItemList extends React.Component {
-  render() {
-    const ArrayItems = items.map((item, index) => {
-      return <item key={index} name={item.name} description={item.description} category={item.category} price={item.price} />;
-    });
-    return <ul className='item-list'>{ArrayItems}</ul>;
-  }
-}
-
-export default ItemList;
+export default arrayOfItems;

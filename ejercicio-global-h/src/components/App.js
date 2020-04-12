@@ -1,19 +1,26 @@
 import React from 'react';
 import Header from './Header';
-
-import api from '../data/data.json';
+import shows from '../data/data.json';
 import ShowList from './ShowList';
 import '../stylesheets/App.css';
 
-function renderCardList() {
-  return;
+const favs = [];
+//necestia recoger los datos de la nieta por parámetros (x=aqui data)
+function handleSearch(data) {
+  console.log(data);
 }
+/* function renderCardList() {
+  return;
+} */
 function App() {
   return (
-    <div className='app'>
-      <Header />
-      <ShowList items={api} />
-      <ul>{renderCardList()}</ul>
+    <div>
+      <Header handleSearch={handleSearch} />
+      <div className='col2'>
+        <ShowList title='Resultados' emptyListMessage='No hay resultados!' items={shows} />
+        <ShowList title='Favoritos' emptyListMessage='No hay series favoritas!' items={favs} />
+        {/* <ul>{renderCardList()}</ul> */}
+      </div>
     </div>
   );
 }

@@ -53,6 +53,7 @@ class App extends React.Component {
       return {
         emails: prevState.emails,
         showEmailId: emailId === prevState.showEmailId ? '' : prevState.showEmailId,
+        //si el email seleccionado es igual al que se está enseñando se borra, sino se deja tal y como está
         //si el usuario borra el mail seleccionado se desselecciona
       };
     });

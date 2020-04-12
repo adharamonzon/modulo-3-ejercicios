@@ -10,7 +10,7 @@ function EmailItem(props) {
   };
 
   const handleDeleteEmail = (ev) => {
-    /* ev.stopPropagatino(); */
+    ev.stopPropagation(); //evitar el burbujeo/propagación hacia arriba, el evento se para donde se pone el stop propagation y no sigue subiendo.
     props.handleDeleteEmail(props.id);
   };
 

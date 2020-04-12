@@ -1,4 +1,5 @@
 import React from 'react';
+import arrayOfItems from './';
 
 function Card(props) {
   console.log('soy card', props);
