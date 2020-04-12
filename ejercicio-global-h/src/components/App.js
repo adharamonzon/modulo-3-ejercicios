@@ -12,17 +12,30 @@ function handleSearch(data) {
 /* function renderCardList() {
   return;
 } */
-function App() {
-  return (
-    <div>
-      <Header handleSearch={handleSearch} />
-      <div className='col2'>
-        <ShowList title='Resultados' emptyListMessage='No hay resultados!' items={shows} />
-        <ShowList title='Favoritos' emptyListMessage='No hay series favoritas!' items={favs} />
-        {/* <ul>{renderCardList()}</ul> */}
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shows: [],
+      favs: [],
+      seachText: '',
+    };
+  }
+
+  render() {
+    console.log(this.state);
+
+    return (
+      <div>
+        <Header handleSearch={handleSearch} />
+        <div className='col2'>
+          <ShowList title='Resultados' emptyListMessage='No hay resultados!' items={shows} />
+          <ShowList title='Favoritos' emptyListMessage='No hay series favoritas!' items={favs} />
+          {/* <ul>{renderCardList()}</ul> */}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
