@@ -1,25 +1,32 @@
 import React from 'react';
 import Header from './Header';
-import shows from '../data/data.json';
 import ShowList from './ShowList';
 import '../stylesheets/App.css';
+import getDataApi from '../data/api';
 
-const favs = [];
-//necestia recoger los datos de la nieta por parámetros (x=aqui data)
-function handleSearch(data) {
-  console.log(data);
-}
-/* function renderCardList() {
-  return;
-} */
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       shows: [],
       favs: [],
-      seachText: '',
+      searchText: '',
     };
+    this.handleSearch = this.handleSearch.bind(this);
+    this.search = this.search.bind(this);
+  }
+  search() {
+    console.log('Buscando...', this.state.searchText);
+    getDataApi(this.state.searchText).then((data) => {
+      this.setState({
+        shows: data,
+      });
+    });
+  }
+
+  //necestia recoger los datos de la nieta por parámetros (x=aqui searchText)
+  handleSearch(searchText) {
+    this.setState({ searchText });
   }
 
   render() {
@@ -27,11 +34,11 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header handleSearch={handleSearch} />
+        <Header search={this.search} handleSearch={this.handleSearch} />
+        <p>La serie buscada es: {this.state.searchText} </p>
         <div className='col2'>
-          <ShowList title='Resultados' emptyListMessage='No hay resultados!' items={shows} />
-          <ShowList title='Favoritos' emptyListMessage='No hay series favoritas!' items={favs} />
-          {/* <ul>{renderCardList()}</ul> */}
+          <ShowList title='Resultados' emptyListMessage='No hay resultados!' items={this.state.shows} />
+          <ShowList title='Favoritos' emptyListMessage='No hay series favoritas!' items={this.state.favs} />
         </div>
       </div>
     );

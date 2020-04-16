@@ -6,10 +6,12 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this); //así se le asigna el valor a this, sino en el método this sería undefined (tu=tu)
+    this.formHandle = this.formHandle.bind(this);
   }
 
   formHandle(ev) {
     ev.preventDefault();
+    this.props.search();
   }
 
   handleSearch(ev) {
@@ -20,8 +22,6 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log(this.props.handleSearch);
-
     return (
       <form onSubmit={this.formHandle}>
         <label htmlFor='search' className='form__label'>

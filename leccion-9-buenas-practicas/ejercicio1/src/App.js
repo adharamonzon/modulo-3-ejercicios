@@ -2,21 +2,10 @@ import React from 'react';
 import './App.css';
 
 const numbers = [1, 4, 6, 8, 45, 89];
-const newNumbers = [];
 
 function App() {
-  const handleNumber = (ev) => {
-    let newNumber = ev.target.value;
-    const newNumbers = [...numbers, parseInt(newNumber)];
-    console.log(newNumbers);
-
-    numbers.map((number, index) => {
-      return <li key={index}>{number}</li>;
-    });
-    newNumbers.filter((number, index) => {
-      return number > 6 ? <li key={index}> {number} </li> : 'lo siento mucho no entiendo nada';
-    });
-  };
+  const [number, setState] = useState(numbers);
+  const result = number.map((numb, index));
 
   return (
     <div>
