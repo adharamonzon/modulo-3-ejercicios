@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchReasons } from '../services/ReasonService.js';
+import { getDataFromApi } from '../services/ReasonService.js';
 import UsersList from './UsersList';
 import '../stylesheets/App.css';
 
@@ -7,34 +7,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: '',
+      users: [],
     };
-    /*     this.getDataFromApi = this.getDataFromApi.bind(this); */
+    this.getDataFromApi = this.getDataFromApi.bind(this);
   }
 
-  /* getDataFromApi() {
-    fetchReasons().then((data) => {
-      this.setState({ data
-          gender: data.results[i].gender,
-          location: data.results[i].location.country,
-          name: data.results[i].name.first,
-          lastname: data.results[i].name.last,
-          image: data.results[i].picture.medium,
-          age: data.results[i].dob.age,
+  getDataFromApi() {
+    getDataFromApi().then((data) => {
+      this.setState({
+        users: data,
       });
     });
-    console.log(fetchReasons);
-  } 
+  }
   componentDidMount() {
     this.getDataFromApi();
   }
-*/
+
   render() {
-    console.log(this.users);
+    console.log(this.state);
+
     return (
       <div>
-        ...
-        <UsersList state={this.state.users} />
+        <UsersList users={this.state} />
       </div>
     );
   }

@@ -1,22 +1,22 @@
 const ENDPOINT = 'https://randomuser.me/api/?results=50';
 
-let users = [];
-
-const fetchReasons = () => {
-  fetch(ENDPOINT).then((response) =>
-    response.json().then((data) => {
-      debugger;
-      for (let i = 0; i < data.length; i++) {
-        users.push({
-          gender: data.results[i].gender,
-          putoName: data.results[i].name,
-        });
+const getDataFromApi = () => {
+  return fetch(ENDPOINT)
+    .then((response) => response.json())
+    .then((data) => {
+      let users = [];
+      for (let item of data.results) {
+        let peopleUser = {
+          name: item.name.first,
+          city: item.location.city,
+          country: item.location.country,
+          age: item.dob.age,
+          photo: item.picture.thumbnail,
+        };
+        users.push(peopleUser);
       }
-      cre;
-    })
-  );
+      return users;
+    });
 };
 
-export { fetchReasons };
-//al exportar un fetch no hace falta poner el default
-console.log(users);
+export { getDataFromApi };

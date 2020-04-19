@@ -1,11 +1,21 @@
 import React from 'react';
+import UserCard from './UserCard';
 
-class UsersList extends React.Component {
-  render() {
-    /* console.log(this.props.state.results[0].gender); */
+const UserList = (props) => {
+  console.log(props.users.users[0]);
+  const users = props.users.users.map((user, index) => {
+    return (
+      <li className='list-item' key={index}>
+        <UserCard className='list-item' userInfo={user} />
+      </li>
+    );
+  });
+  return (
+    <main className='main'>
+      <aside className='aside'>esto es el aside</aside>
+      <ul className='list'>{users}</ul>;
+    </main>
+  );
+};
 
-    return <div>holi</div>;
-  }
-}
-
-export default UsersList;
+export default UserList;
