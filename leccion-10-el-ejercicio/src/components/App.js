@@ -1,6 +1,7 @@
 import React from 'react';
 import { getDataFromApi } from '../services/ReasonService.js';
 import UsersList from './UsersList';
+import Aside from './Aside';
 import '../stylesheets/App.css';
 
 class App extends React.Component {
@@ -10,6 +11,7 @@ class App extends React.Component {
       users: [],
     };
     this.getDataFromApi = this.getDataFromApi.bind(this);
+    this.filterGenre = this.filterGenre.bind(this);
   }
 
   getDataFromApi() {
@@ -23,12 +25,19 @@ class App extends React.Component {
     this.getDataFromApi();
   }
 
+  filterGenre(filter) {
+    console.log('app', filter, this.state.users);
+  }
+
   render() {
     console.log(this.state);
 
     return (
       <div>
-        <UsersList users={this.state} />
+        <main className='main'>
+          <Aside className='aside' filterGenre={this.filterGenre} />
+          <UsersList users={this.state} />
+        </main>
       </div>
     );
   }

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .main {
   display: grid;
@@ -12,7 +13,6 @@
 }
 .list {
   margin: 30px;
-  grid-column: 2/5;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   list-style: none;
@@ -48,4 +48,20 @@
   color: rgb(88, 88, 216);
   font-weight: bold;
   font-size: 24px;
+}
+.aside {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  margin-top: 10px;
+}
+.text-input {
+  margin-top: 10px;
+  height: 25px;
+  border-radius: 6px;
+}
+.check-input {
+  margin-top: 10px;
 }

@@ -8,10 +8,12 @@ const getDataFromApi = () => {
       for (let item of data.results) {
         let peopleUser = {
           name: item.name.first,
+          lastName: item.name.last,
           city: item.location.city,
           country: item.location.country,
           age: item.dob.age,
-          photo: item.picture.thumbnail,
+          photo: item.picture.large,
+          gender: item.gender,
         };
         users.push(peopleUser);
       }

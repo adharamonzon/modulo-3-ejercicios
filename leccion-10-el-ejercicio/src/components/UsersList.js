@@ -12,7 +12,6 @@ const UserList = (props) => {
   });
   return (
     <main className='main'>
-      <aside className='aside'>esto es el aside</aside>
       <ul className='list'>{users}</ul>;
     </main>
   );
